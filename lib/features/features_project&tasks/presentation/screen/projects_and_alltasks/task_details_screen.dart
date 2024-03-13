@@ -9,6 +9,7 @@ import 'package:trudo/features/features_project&tasks/presentation/screen/projec
 import 'package:trudo/features/features_project&tasks/presentation/screen/projects_and_alltasks/task_overview_screen.dart';
 import 'package:trudo/features/features_project&tasks/presentation/screen/projects_and_alltasks/task_subtask_screen.dart';
 import 'package:trudo/features/features_project&tasks/data/model/project_details_model.dart'
+    // ignore: library_prefixes
     as ProjectDetailsModel;
 
 class TaskDetailsScreen extends StatefulWidget {

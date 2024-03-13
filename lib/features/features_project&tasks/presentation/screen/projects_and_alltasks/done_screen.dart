@@ -15,6 +15,7 @@ class DoneScreen extends StatefulWidget {
   const DoneScreen({Key? key, this.cards}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _DoneScreenState createState() => _DoneScreenState();
 }
 

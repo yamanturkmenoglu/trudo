@@ -139,7 +139,7 @@ class AddTaskCubit extends Cubit<AddTaskState> {
         "description": state.description,
 
         "priority": state.priority,
-        "project": "658f6b5b0f393fb40d59aebd",
+        "project": state.project,
 
         // "files": ["test"],
         "dueDate": state.dueDate,

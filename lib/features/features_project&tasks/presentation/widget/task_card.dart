@@ -144,7 +144,7 @@ class TaskCard extends StatelessWidget {
                                                 color: AppColor.purple,
                                                 fontSize: 14)),
                                         trailing: Text(
-                                          user.createdAt
+                                          card.updatedAt
                                               .toString()
                                               .substring(0, 10),
                                           style: poppinsMediumSmall.copyWith(

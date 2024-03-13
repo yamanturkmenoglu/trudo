@@ -75,4 +75,9 @@ class AllUsersModel {
         "updatedAt": updatedAt?.toIso8601String(),
         "__v": v,
       };
+
+  @override
+  String toString() {
+    return 'AllUsersModel{id: $id, firstName: $firstName, lastName: $lastName, phoneNumber: $phoneNumber, teamMembers: $teamMembers, roles: $roles, active: $active, username: $username, createdAt: $createdAt, updatedAt: $updatedAt, v: $v}';
+  }
 }

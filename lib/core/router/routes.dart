@@ -17,9 +17,11 @@ import 'package:trudo/features/feature_home/presentation/screen/help_screen.dart
 import 'package:trudo/features/feature_home/presentation/screen/home_screen.dart';
 import 'package:trudo/features/feature_home/presentation/screen/invite_frindes.dart';
 import 'package:trudo/features/feature_onbording/introduction_animation/screen/introduction_animation_screen.dart';
-import 'package:trudo/features/features_project&tasks/data/model/project_details_model.dart';
 
+
+// ignore: unused_import
 import 'package:trudo/features/features_project&tasks/data/model/project_details_model.dart'
+    // ignore: library_prefixes
     as ProjectModels;
 import 'package:trudo/features/features_project&tasks/data/model/projects_model.dart';
 import 'package:trudo/features/features_project&tasks/presentation/screen/projects_and_alltasks/project_task_details_screen.dart';

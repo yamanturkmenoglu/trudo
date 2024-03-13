@@ -3,9 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trudo/features/features_project&tasks/cubit/edit_add_task_cubit/edit_add_task_cubit_cubit.dart';
 
 class DatePickerExample extends StatefulWidget {
-  const DatePickerExample({super.key, this.restorationId});
+  const DatePickerExample({
+    Key? key,
+    this.restorationId,
+    required this.initialDate,
+  }) : super(key: key);
 
   final String? restorationId;
+  final DateTime initialDate;
 
   @override
   State<DatePickerExample> createState() => _DatePickerExampleState();
@@ -13,24 +18,26 @@ class DatePickerExample extends StatefulWidget {
 
 class _DatePickerExampleState extends State<DatePickerExample>
     with RestorationMixin {
-  @override
-  String? get restorationId => widget.restorationId;
-
-  TextEditingController dateTextEditingController =
-      TextEditingController(text: DateTime.now().toString().substring(0, 10));
-
+  late TextEditingController dateTextEditingController;
   final RestorableDateTime _selectedDate =
       RestorableDateTime(DateTime(2021, 7, 25));
-  late final RestorableRouteFuture<DateTime?> _restorableDatePickerRouteFuture =
-      RestorableRouteFuture<DateTime?>(
-    onComplete: _selectDate,
-    onPresent: (NavigatorState navigator, Object? arguments) {
-      return navigator.restorablePush(
-        _datePickerRoute,
-        arguments: _selectedDate.value.millisecondsSinceEpoch,
-      );
-    },
-  );
+  late final RestorableRouteFuture<DateTime?> _restorableDatePickerRouteFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    dateTextEditingController = TextEditingController(
+        text: widget.initialDate.toString().substring(0, 10));
+    _restorableDatePickerRouteFuture = RestorableRouteFuture<DateTime?>(
+      onComplete: _selectDate,
+      onPresent: (NavigatorState navigator, Object? arguments) {
+        return navigator.restorablePush(
+          _datePickerRoute,
+          arguments: _selectedDate.value.millisecondsSinceEpoch,
+        );
+      },
+    );
+  }
 
   @pragma('vm:entry-point')
   static Route<DateTime> _datePickerRoute(
@@ -78,7 +85,7 @@ class _DatePickerExampleState extends State<DatePickerExample>
         _restorableDatePickerRouteFuture.present();
       },
       icon: const Icon(Icons.calendar_today),
-      label: Text(dateTextEditingController.text), // Eski tarihi göster
+      label: Text(dateTextEditingController.text),
       style: ButtonStyle(
         foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
         backgroundColor: MaterialStateProperty.all<Color>(
@@ -87,4 +94,8 @@ class _DatePickerExampleState extends State<DatePickerExample>
       ),
     );
   }
+
+  @override
+  String? get restorationId =>
+      null; // Return null to remove restorationId getter
 }

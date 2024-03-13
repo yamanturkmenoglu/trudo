@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:trudo/core/constens/appcolors.dart';
 import 'package:trudo/core/router/routes_names.dart';
 import 'package:trudo/features/features_project&tasks/data/model/project_details_model.dart'
+    // ignore: library_prefixes
     as ProjectDetailsModel;
 
 import 'package:trudo/features/features_project&tasks/presentation/widget/search_bar.dart';
@@ -14,6 +15,7 @@ class BackLogScreen extends StatefulWidget {
   const BackLogScreen({Key? key, this.cards}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _BackLogScreenState createState() => _BackLogScreenState();
 }
 

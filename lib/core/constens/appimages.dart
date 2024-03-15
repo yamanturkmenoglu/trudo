@@ -9,4 +9,8 @@ class AppImageasset {
   static String kFacebook = '$rootimages/facebook.svg';
   static String kGoogle = '$rootimages/google.svg';
   static String kApple = '$rootimages/apple.svg';
+  static String projects = '$rootimages/project.svg';
+  static String sales = '$rootimages/sales.svg';
+  static String password = '$rootimages/resetpassword.svg';
+  static String todo = '$rootimages/todo.svg';
 }

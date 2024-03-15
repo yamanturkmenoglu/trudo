@@ -20,7 +20,8 @@ class AuthField extends StatelessWidget {
     this.keyboardType,
     this.suffixIcon,
     this.obscureText = false,
-    required this.iconData, this.onChange,
+    required this.iconData,
+    this.onChange,
   });
 
   @override
@@ -51,8 +52,7 @@ class AuthField extends StatelessWidget {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide:
-              BorderSide(color: AppColor.primarycolor.withOpacity(0.4)),
+          borderSide: BorderSide(color: AppColor.primarycolor.withOpacity(0.4)),
         ),
         prefixIcon: Icon(
           iconData,
@@ -60,6 +60,7 @@ class AuthField extends StatelessWidget {
           color: const Color(0x3EFFFFFF),
         ),
       ),
+      cursorColor: AppColor.primarycolor,
     );
   }
 }

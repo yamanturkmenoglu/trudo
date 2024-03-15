@@ -23,4 +23,10 @@ class AppRoutes {
   static const editContactsScreen = '/editContactsScreen';
   static const addCalendersScreen = '/addCalendersScreen';
   static const editCalendersScreen = '/editCalendersScreen';
+  ////////////////////////////////ToDoApp////////////////////////////////
+  static const addTaskToDoAppScreen = '/addTaskToDoAppScreen';
+  static const taskDetailsToDoAppScreen = '/taskDetailsToDoAppScreen';
+  ////////////////////////////////passwordManager////////////////////////////////
+  static const passwordDetailsScreen = '/passwordDetailsScreen';
+  static const addpasswordScreen = '/addpasswordScreen';
 }

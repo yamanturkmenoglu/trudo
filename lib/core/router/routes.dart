@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:trudo/core/router/routes_names.dart';
 import 'package:trudo/features/feature_Sales/presentation/screens/calenders/add_calender_screen.dart';
@@ -17,8 +18,10 @@ import 'package:trudo/features/feature_home/presentation/screen/help_screen.dart
 import 'package:trudo/features/feature_home/presentation/screen/home_screen.dart';
 import 'package:trudo/features/feature_home/presentation/screen/invite_frindes.dart';
 import 'package:trudo/features/feature_onbording/introduction_animation/screen/introduction_animation_screen.dart';
-
-
+import 'package:trudo/features/feature_password_managment/cubit/add_new_account_cubit/add_new_account_cubit_cubit.dart';
+import 'package:trudo/features/feature_password_managment/presentation/screen/add_new_account_screen.dart';
+import 'package:trudo/features/feature_to_do/presentation/screens/add_task_to_do_app_screen.dart';
+import 'package:trudo/features/feature_to_do/presentation/screens/task_details_to_do_app_screen.dart';
 // ignore: unused_import
 import 'package:trudo/features/features_project&tasks/data/model/project_details_model.dart'
     // ignore: library_prefixes
@@ -123,15 +126,7 @@ final routes = [
     ),
   ),
   ///////////////////////////////Projects&Tasks///////////////////////////
-  // GoRoute(
-  //   path: AppRoutes.projectTaskDetailsScreen,
-  //   pageBuilder: (context, state) => CupertinoPage<void>(
 
-  //     key: state.pageKey,
-  //     child: const ProjectTaskDetailsScreen(
-
-  //     ),
-  //   ),
   // ),
   GoRoute(
       path: AppRoutes.projectTaskDetailsScreen,
@@ -147,13 +142,7 @@ final routes = [
     path: AppRoutes.taskDetailsScreen,
     pageBuilder: TaskDetailsScreen.builder,
   ),
-  // GoRoute(
-  //   path: AppRoutes.taskDetailsScreen,
-  //   pageBuilder: (context, state) => CupertinoPage<void>(
-  //     key: state.pageKey,
-  //     child: const TaskDetailsScreen(cards: [], card: null,),
-  //   ),
-  // ),
+
   /////////////////////////////////Sales///////////////////////////////////
   GoRoute(
     path: AppRoutes.addNewActionPiplineScreen,
@@ -197,4 +186,26 @@ final routes = [
       child: const EditCalenderScreen(),
     ),
   ),
+  GoRoute(
+      path: AppRoutes.addTaskToDoAppScreen,
+      pageBuilder: (context, state) => CupertinoPage<void>(
+            key: state.pageKey,
+            child: const AddTaskToDoAppScreen(),
+          )),
+  GoRoute(
+      path: AppRoutes.taskDetailsToDoAppScreen,
+      pageBuilder: (context, state) => CupertinoPage<void>(
+            key: state.pageKey,
+            child: const TaskDetailsToDoAppScreen(),
+          )),
+
+  GoRoute(
+      path: AppRoutes.addpasswordScreen,
+      pageBuilder: (context, state) => CupertinoPage<void>(
+            key: state.pageKey,
+            child: BlocProvider(
+              create: (context) => AddNewAccountCubit(),
+              child: const AddNewAccountScreen(),
+            ),
+          )),
 ];

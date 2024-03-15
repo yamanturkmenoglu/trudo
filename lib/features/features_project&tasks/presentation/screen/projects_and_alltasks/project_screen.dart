@@ -1,10 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:trudo/core/constens/appcolors.dart';
 import 'package:trudo/core/constens/textstyle.dart';
+import 'package:trudo/core/providers/user_information_provider.dart';
 import 'package:trudo/core/router/routes_names.dart';
 import 'package:trudo/features/features_project&tasks/cubit/get_projects_cubit/get_projects_cubit_cubit.dart';
 import 'package:trudo/features/features_project&tasks/cubit/get_projects_cubit/get_projects_cubit_state.dart';
@@ -79,7 +79,8 @@ class ProjectScreen extends StatelessWidget {
                                             context, project.id!);
 
                                     context.push(
-                                        AppRoutes.projectTaskDetailsScreen,extra: project);
+                                        AppRoutes.projectTaskDetailsScreen,
+                                        extra: project);
                                   },
                                   child: ProjectsCard(
                                     projectsModel: state.projects[index],
@@ -530,10 +531,24 @@ class AddProject extends StatelessWidget {
   final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
+    final userInformationProvider = context.read<UserInformationProvider>();
+    String userNameInitials = userInformationProvider.userName.isNotEmpty
+        ? userInformationProvider.userName[0].toUpperCase()
+        : "";
     return Row(
       children: [
-        Text('Welcome to TruTed',
-            style: poppinsSemiBoldLarge.copyWith(color: AppColor.purple)),
+        CircleAvatar(
+          backgroundColor: const Color(0xFFC18F04),
+          radius: 18,
+          child: Text(userNameInitials),
+        ),
+        const SizedBox(
+          width: 10,
+        ),
+        Text(
+          userInformationProvider.userName,
+          style: poppinsMediumSmall.copyWith(color: AppColor.purple),
+        ),
         const Spacer(),
         IconButton(
           icon: const Icon(
@@ -554,51 +569,54 @@ class Filter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text('Filter',
-            style: poppinsMediumSmall.copyWith(
-                color: AppColor.purple, fontSize: 15)),
-        const Spacer(),
-        PopupMenuButton(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(
-                  10.0), // Adjust the corner radius as needed
-              // You can add a border if desired
-            ),
-            icon: const FaIcon(
-              FontAwesomeIcons.filter,
-              color: AppColor.purple,
-              size: 15,
-            ),
-            color: AppColor.white,
-            itemBuilder: (context) => [
-                  PopupMenuItem(
-                    onTap: () {},
-                    child: Text("All projects",
-                        style:
-                            poppinsMediumSmall.copyWith(color: AppColor.black)),
-                  ),
-                  PopupMenuItem(
-                    onTap: () {},
-                    child: Text("Marketing",
-                        style:
-                            poppinsMediumSmall.copyWith(color: AppColor.black)),
-                  ),
-                  PopupMenuItem(
-                    onTap: () {},
-                    child: Text("Development",
-                        style:
-                            poppinsMediumSmall.copyWith(color: AppColor.black)),
-                  ),
-                  PopupMenuItem(
-                    onTap: () {},
-                    child: Text("Design",
-                        style:
-                            poppinsMediumSmall.copyWith(color: AppColor.black)),
-                  ),
-                ])
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Row(
+        children: [
+          Text('Filter',
+              style: poppinsMediumSmall.copyWith(
+                  color: AppColor.purple, fontSize: 15)),
+          const Spacer(),
+          PopupMenuButton(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(
+                    10.0), // Adjust the corner radius as needed
+                // You can add a border if desired
+              ),
+              icon: const FaIcon(
+                FontAwesomeIcons.filter,
+                color: AppColor.purple,
+                size: 15,
+              ),
+              color: AppColor.white,
+              itemBuilder: (context) => [
+                    PopupMenuItem(
+                      onTap: () {},
+                      child: Text("All projects",
+                          style: poppinsMediumSmall.copyWith(
+                              color: AppColor.black)),
+                    ),
+                    PopupMenuItem(
+                      onTap: () {},
+                      child: Text("Marketing",
+                          style: poppinsMediumSmall.copyWith(
+                              color: AppColor.black)),
+                    ),
+                    PopupMenuItem(
+                      onTap: () {},
+                      child: Text("Development",
+                          style: poppinsMediumSmall.copyWith(
+                              color: AppColor.black)),
+                    ),
+                    PopupMenuItem(
+                      onTap: () {},
+                      child: Text("Design",
+                          style: poppinsMediumSmall.copyWith(
+                              color: AppColor.black)),
+                    ),
+                  ])
+        ],
+      ),
     );
   }
 }

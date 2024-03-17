@@ -1,7 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:trudo/features/feature_password_managment/data/model/accounts_model.dart';
 
-abstract class AllAccountsState extends Equatable {}
+abstract class AllAccountsState extends Equatable {
+  const AllAccountsState();
+}
 
 class AllAccountsInitial extends AllAccountsState {
   @override
@@ -16,7 +18,7 @@ class AllAccountsLoading extends AllAccountsState {
 class AllAccountsDone extends AllAccountsState {
   final List<AccountModel> account;
 
-  AllAccountsDone({required this.account});
+  const AllAccountsDone({required this.account});
 
   @override
   List<Object> get props => [account];

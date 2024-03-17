@@ -68,16 +68,15 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                         } else {
                           return GridView(
                             padding: const EdgeInsets.only(
-                                top: 0, left: 12, right: 12),
+                                top: 20, left: 12, right: 12),
                             physics: const BouncingScrollPhysics(),
                             scrollDirection: Axis.vertical,
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: multiple ? 2 : 1,
-                              mainAxisSpacing: 12.0,
-                              crossAxisSpacing: 12.0,
-                              childAspectRatio: 1.5,
-                            ),
+                                    crossAxisCount: multiple ? 2 : 1,
+                                    mainAxisSpacing: 12.0,
+                                    crossAxisSpacing: 12.0,
+                                    childAspectRatio: multiple ? 0.9 : 2.2),
                             children: List<Widget>.generate(
                               homeList.length,
                               (int index) {
@@ -146,16 +145,24 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
               ),
             ),
           ),
-          const Expanded(
+          Expanded(
             child: Center(
               child: Padding(
-                padding: EdgeInsets.only(top: 4),
-                child: Text(
-                  'TruDo',
-                  style: TextStyle(
-                    fontSize: 22,
-                    color: AppColor.purple,
-                    fontWeight: FontWeight.w700,
+                padding: const EdgeInsets.only(top: 4),
+                // child: Text(
+                //   'TruDo',
+                //   style: TextStyle(
+                //     fontSize: 22,
+                //     color: AppColor.purple,
+                //     fontWeight: FontWeight.w700,
+                //   ),
+                // ),
+                child: SizedBox(
+                  width: AppBar().preferredSize.height - 8,
+                  height: AppBar().preferredSize.height - 8,
+                  child: Image.asset(
+                    'assets/images/icon.png',
+                    height: 100,
                   ),
                 ),
               ),

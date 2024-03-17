@@ -14,11 +14,13 @@ class AddNewAccountScreen extends StatefulWidget {
   const AddNewAccountScreen({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _AddNewAccountScreenState createState() => _AddNewAccountScreenState();
 }
 
 class _AddNewAccountScreenState extends State<AddNewAccountScreen> {
   String? _selectedCategory;
+
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +51,8 @@ class _AddNewAccountScreenState extends State<AddNewAccountScreen> {
                     onPressed: () {
                       context
                           .read<AddNewAccountCubit>()
-                          .addAccountMethod(context: context);
+                          .addAccountMethod(context: context)
+                          .then((value) => Navigator.pop(context));
                     },
                     icon: const Icon(Icons.done));
               }
@@ -170,6 +173,10 @@ class _AddNewAccountScreenState extends State<AddNewAccountScreen> {
                         ),
                       ),
                     ),
+                    hint: const Text(
+                      'Select Category ',
+                      style: TextStyle(color: AppColor.grifortext),
+                    ),
                     dropdownColor: AppColor.lightblack,
                     value: selectedCategory,
                     onChanged: (newValue) {
@@ -177,9 +184,9 @@ class _AddNewAccountScreenState extends State<AddNewAccountScreen> {
                         selectedCategory = newValue;
                         _selectedCategory = newValue?.id;
                         context.read<AddNewAccountCubit>().setAccount(
-                            AddAccountModel(
-                                category: _selectedCategory.toString()));
+                            AddAccountModel(category: newValue?.id));
                       });
+                      // ignore: avoid_print
                       print(_selectedCategory);
                     },
                     items: state.category

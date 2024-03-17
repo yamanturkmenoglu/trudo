@@ -126,6 +126,6 @@ class _IntroductionAnimationScreenState
 
   void _signUpClick() {
     _saveStepToHive('1');
-    context.go(AppRoutes.signUp);
+    context.go(AppRoutes.login);
   }
 }

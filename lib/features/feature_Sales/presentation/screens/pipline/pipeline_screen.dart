@@ -110,20 +110,63 @@ class PiplineBody extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 30,
+                height: 10,
               ),
               Expanded(
-                child: ListWheelScrollView(
-                    physics: const FixedExtentScrollPhysics(),
-                    itemExtent: 260,
-                    children: const [
-                      PipLineCard(),
-                      PipLineCard(),
-                      PipLineCard(),
-                      PipLineCard(),
-                      PipLineCard(),
-                      PipLineCard(),
-                    ]),
+                child: Stack(
+                  children: [
+                    // Liste
+                    ListWheelScrollView(
+                      physics: const FixedExtentScrollPhysics(),
+                      itemExtent: 260,
+                      children: const [
+                        PipLineCard(),
+                        PipLineCard(),
+                        PipLineCard(),
+                        PipLineCard(),
+                        PipLineCard(),
+                        PipLineCard(),
+                      ],
+                    ),
+                    Positioned(
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      child: Container(
+                        height: 100, // Gölge yüksekliği
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              Colors.black.withOpacity(0.8),
+                              Colors.transparent,
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    // Alttan gelen beyaz şeffaf gölge
+                    Positioned(
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      child: Container(
+                        height: 100, // Gölge yüksekliği
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.bottomCenter,
+                            end: Alignment.topCenter,
+                            colors: [
+                              Colors.black.withOpacity(0.8),
+                              Colors.transparent,
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(
                 height: 200,

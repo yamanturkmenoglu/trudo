@@ -31,39 +31,46 @@ class HomeListView extends StatelessWidget {
             transform: Matrix4.translationValues(
                 0.0, 50 * (1.0 - animation!.value), 0.0),
             child: AspectRatio(
-              aspectRatio: 1.5,
+              aspectRatio: 1.9,
               child: ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(4.0)),
-                child: Stack(
-                  alignment: AlignmentDirectional.center,
-                  children: <Widget>[
-                    SvgPicture.asset(
-                      listData!.imagePath,
-                      fit: BoxFit.cover,
-                      height: multiple ? 60 : 120,
-                    ),
-                    Positioned(
-                      bottom: 0,
-                      child: Text(
-                        listData!.title,
-                        style: multiple
-                            ? poppinsMediumSmall.copyWith(
-                                color: AppColor.purple,
-                              )
-                            : poppinsMediumNormal.copyWith(
-                                color: AppColor.purple, fontSize: 20),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: listData!.color, // Use color from HomeList
+                    borderRadius: const BorderRadius.all(Radius.circular(4.0)),
+                  ),
+                  child: Stack(
+                    alignment: AlignmentDirectional.center,
+                    children: <Widget>[
+                      SvgPicture.asset(
+                        listData!.imagePath,
+                        fit: BoxFit.cover,
+                        height: multiple ? 50 : 50,
+                        // ignore: deprecated_member_use
+                        color: AppColor.white,
                       ),
-                    ),
-                    Material(
-                      color: Colors.transparent,
-                      child: InkWell(
-                        splashColor: Colors.grey.withOpacity(0.2),
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(4.0)),
-                        onTap: callBack,
+                      Positioned(
+                        bottom: 15,
+                        child: Text(
+                          listData!.title,
+                          style: multiple
+                              ? poppinsMediumSmall.copyWith(
+                                  color: AppColor.purple, fontSize: 18)
+                              : poppinsMediumNormal.copyWith(
+                                  color: AppColor.purple, fontSize: 20),
+                        ),
                       ),
-                    ),
-                  ],
+                      Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          splashColor: Colors.grey.withOpacity(0.2),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(4.0)),
+                          onTap: callBack,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

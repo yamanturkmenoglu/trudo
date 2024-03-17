@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trudo/core/constens/appcolors.dart';
 import 'package:trudo/core/constens/textstyle.dart';
+import 'package:trudo/features/features_project&tasks/cubit/edit_add_task_cubit/edit_add_task_cubit_cubit.dart';
+import 'package:trudo/features/features_project&tasks/cubit/edit_add_task_cubit/edit_add_task_cubit_state.dart';
 import 'package:trudo/features/features_project&tasks/cubit/get_projects_tasks_cubit/projects_tasks_cubit_cubit.dart';
 import 'package:trudo/features/features_project&tasks/cubit/get_projects_tasks_cubit/projects_tasks_cubit_state.dart';
 // ignore: unused_import
@@ -15,6 +17,7 @@ import 'package:trudo/features/features_project&tasks/presentation/screen/projec
 import 'package:trudo/features/features_project&tasks/presentation/screen/projects_and_alltasks/done_screen.dart';
 import 'package:trudo/features/features_project&tasks/presentation/screen/projects_and_alltasks/review_screen.dart';
 import 'package:trudo/features/features_project&tasks/presentation/screen/projects_and_alltasks/to_do_screen.dart';
+import 'package:trudo/features/features_project&tasks/presentation/widget/custom_text_form_field.dart';
 
 class ProjectTaskDetailsScreen extends StatefulWidget {
   final ProjectsModel projectsModel;
@@ -153,6 +156,97 @@ class _ProjectTaskDetailsState extends State<ProjectTaskDetailsScreen>
             },
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: AppColor.black,
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+                contentPadding: EdgeInsets.zero,
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 19.0),
+                      child: CustomTextFormField(
+                        onChange: (String value) {
+                          context.read<AddTaskCubit>().setStatus("back_log");
+                          context
+                              .read<AddTaskCubit>()
+                              .setProject(widget.projectsModel.id!);
+                          context.read<AddTaskCubit>().setName(value);
+                        },
+                        hintText: "Enter task name",
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    BlocBuilder<AddTaskCubit, AddTaskState>(
+                      builder: (context, state) {
+                        if (state.statusAddCard == StatusAddCard.loading ||
+                            state.statusAddCard == StatusAddCard.submitting) {
+                          return const Column(
+                            children: [
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Center(
+                                child: SizedBox(
+                                  width: 20,
+                                  height: 20,
+                                  child: CircularProgressIndicator(
+                                    color: AppColor.primarycolor,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              )
+                            ],
+                          );
+                        }
+
+                        if (state.statusAddCard == StatusAddCard.initial ||
+                            state.statusAddCard == StatusAddCard.error) {
+                          return Padding(
+                              padding: const EdgeInsets.all(8),
+                              child: IconButton(
+                                  onPressed: () {
+                                    context
+                                        .read<AddTaskCubit>()
+                                        .addTask(context: context)
+                                        .then((value) {
+                                      context
+                                          .read<ProjectDetailsCubit>()
+                                          .loadProjectDetails(
+                                              context, widget.projectsModel.id!)
+                                          .then((value) {
+                                        Navigator.pop(context);
+                                      });
+                                    });
+                                  },
+                                  icon: const Icon(Icons.done,
+                                      color: AppColor.primarycolor, size: 30)));
+                        }
+                        return const SizedBox();
+                      },
+                    ),
+                  ],
+                ),
+              );
+            },
+          );
+        },
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
       ),
     );
   }

@@ -60,7 +60,7 @@ class CusttomDrawerHome extends StatelessWidget {
                   icon: FontAwesomeIcons.headset,
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
                 CusttomListTitleDrawer(
                   onTap: () {
@@ -70,7 +70,7 @@ class CusttomDrawerHome extends StatelessWidget {
                   icon: Icons.comment,
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
                 CusttomListTitleDrawer(
                   onTap: () {
@@ -80,7 +80,7 @@ class CusttomDrawerHome extends StatelessWidget {
                   icon: Icons.person_search,
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
                 CusttomListTitleDrawer(
                   onTap: () {},
@@ -88,7 +88,7 @@ class CusttomDrawerHome extends StatelessWidget {
                   icon: Icons.share,
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
                 CusttomListTitleDrawer(
                   onTap: () {},

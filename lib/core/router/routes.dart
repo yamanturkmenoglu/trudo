@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:trudo/core/router/routes_names.dart';
 import 'package:trudo/features/feature_Sales/presentation/screens/calenders/add_calender_screen.dart';
@@ -18,7 +17,6 @@ import 'package:trudo/features/feature_home/presentation/screen/help_screen.dart
 import 'package:trudo/features/feature_home/presentation/screen/home_screen.dart';
 import 'package:trudo/features/feature_home/presentation/screen/invite_frindes.dart';
 import 'package:trudo/features/feature_onbording/introduction_animation/screen/introduction_animation_screen.dart';
-import 'package:trudo/features/feature_password_managment/cubit/add_new_account_cubit/add_new_account_cubit_cubit.dart';
 import 'package:trudo/features/feature_password_managment/presentation/screen/add_new_account_screen.dart';
 import 'package:trudo/features/feature_to_do/presentation/screens/add_task_to_do_app_screen.dart';
 import 'package:trudo/features/feature_to_do/presentation/screens/task_details_to_do_app_screen.dart';
@@ -203,9 +201,6 @@ final routes = [
       path: AppRoutes.addpasswordScreen,
       pageBuilder: (context, state) => CupertinoPage<void>(
             key: state.pageKey,
-            child: BlocProvider(
-              create: (context) => AddNewAccountCubit(),
-              child: const AddNewAccountScreen(),
-            ),
+            child: const AddNewAccountScreen(),
           )),
 ];

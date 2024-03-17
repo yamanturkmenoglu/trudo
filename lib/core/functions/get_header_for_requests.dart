@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:math';
 
 import 'package:trudo/core/hive/user.dart';
 import 'package:trudo/core/providers/user_information_provider.dart';
@@ -9,8 +8,7 @@ enum HeaderType { withToken, withContentType }
 Map<String, String> getHeader(HeaderType type) {
   UserInformationProvider provider = UserInformationProvider();
   UserHiveModel userHiveModel = provider.userHiveModel;
-  // log("${userHiveModel.accessToken}");
-  //  ${userHiveModel.accessToken}
+
   switch (type) {
     case HeaderType.withToken:
       return {

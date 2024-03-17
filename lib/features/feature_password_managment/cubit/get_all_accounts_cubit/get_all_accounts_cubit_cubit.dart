@@ -46,13 +46,34 @@ class AllAccountsCubit extends Cubit<AllAccountsState> {
               .toList()));
     }
   }
+
   void addAccount(AccountModel newaccount) {
     final currentState = state;
     if (currentState is AllAccountsDone) {
-      final updatedAccount =
-          List<AccountModel>.from(currentState.account)..add(newaccount);
+      final updatedAccount = List<AccountModel>.from(currentState.account)
+        ..add(newaccount);
       emit(AllAccountsDone(account: updatedAccount));
+    }
+  }
+  void editAccount(String accountId, AccountModel updatedAccount) {
+    final currentState = state;
+    if (currentState is AllAccountsDone) {
+      final updatedAccounts = currentState.account.map((account) {
+        return account.id == accountId
+            ? account.copyWith(
+                id: updatedAccount.id,
+                url: updatedAccount.url,
+                name: updatedAccount.name,
+                password: updatedAccount.password,
+                category: updatedAccount.category,
+                updatedAt: updatedAccount.updatedAt,
+                createdAt: updatedAccount.createdAt,
+                v: updatedAccount.v)
+            : account;
+      }).toList();
+      emit(AllAccountsDone(account: updatedAccounts));
     }
   }
 
 }
+  

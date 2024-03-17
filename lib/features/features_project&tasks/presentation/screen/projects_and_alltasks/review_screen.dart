@@ -57,7 +57,10 @@ class _ReviewScreenState extends State<ReviewScreen> {
                 return TaskCard(
                   card: filteredCards![index],
                   onTap: () {
-                    context.push(AppRoutes.taskDetailsScreen);
+                    context.push(AppRoutes.taskDetailsScreen, extra: {
+                      'param1': widget.cards,
+                      'param2': filteredCards![index],
+                    });
                   },
                 );
               },

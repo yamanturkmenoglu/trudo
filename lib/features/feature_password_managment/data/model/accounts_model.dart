@@ -89,6 +89,11 @@ class AccountModel {
         "__v": v,
         "image": image,
       };
+
+      @override
+      String toString() {
+        return 'AccountModel(id: $id, url: $url, name: $name, password: $password, category: $category, createdAt: $createdAt, updatedAt: $updatedAt, v: $v, image: $image)';
+      }
 }
 
 class Category {
@@ -140,4 +145,9 @@ class Category {
         "updatedAt": updatedAt?.toIso8601String(),
         "__v": v,
       };
+
+   @override
+  String toString() {
+    return 'Category{id: $id, name: $name, createdAt: $createdAt, updatedAt: $updatedAt, v: $v}';
+  }
 }

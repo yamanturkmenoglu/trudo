@@ -9,9 +9,14 @@ import 'package:trudo/core/constens/textstyle.dart';
 import 'package:trudo/core/router/routes_names.dart';
 import 'package:trudo/features/feature_password_managment/cubit/get_all_accounts_cubit/get_all_accounts_cubit_cubit.dart';
 import 'package:trudo/features/feature_password_managment/cubit/get_all_accounts_cubit/get_all_accounts_cubit_state.dart';
+import 'package:trudo/features/feature_password_managment/cubit/get_category_password_cubit/get_category_password_cubit_cubit.dart';
+import 'package:trudo/features/feature_password_managment/cubit/get_category_password_cubit/get_category_password_cubit_state.dart';
+import 'package:trudo/features/feature_password_managment/presentation/processing/edit_account_controller.dart';
 import 'package:trudo/features/feature_password_managment/presentation/widget/flatting_button_password.dart';
 import 'package:trudo/features/feature_password_managment/presentation/widget/password_mang_appbar.dart';
 import 'package:trudo/features/features_project&tasks/presentation/widget/custom_text_form_field.dart';
+
+import '../../data/model/accounts_model.dart';
 
 class PasswordMangScreen extends StatefulWidget {
   const PasswordMangScreen({super.key});
@@ -22,6 +27,23 @@ class PasswordMangScreen extends StatefulWidget {
 
 class _PasswordMangScreenState extends State<PasswordMangScreen> {
   final ValueNotifier<bool> isSearchContainerVisible = ValueNotifier(false);
+  late EditAccountController _controller;
+  // ignore: unused_field
+  String? _selectedCategory;
+  final ValueNotifier<String?> _selectedCategoryNotifier =
+      ValueNotifier<String?>(null);
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = EditAccountController(accountModel: AccountModel());
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,10 +108,10 @@ class _PasswordMangScreenState extends State<PasswordMangScreen> {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          PopupMenuButton(
+                      child: BlocBuilder<AllCategoryCubit, AllCategoryState>(
+                        builder: (context, state) {
+                          if (state is AllCategoryDone) {
+                            return PopupMenuButton(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
@@ -103,33 +125,25 @@ class _PasswordMangScreenState extends State<PasswordMangScreen> {
                                 ),
                               ),
                               color: AppColor.white,
-                              itemBuilder: (context) => [
-                                    PopupMenuItem(
-                                      onTap: () {},
-                                      child: Text("All projects",
-                                          style: poppinsMediumSmall.copyWith(
-                                              color: AppColor.black)),
-                                    ),
-                                    PopupMenuItem(
-                                      onTap: () {},
-                                      child: Text("Marketing",
-                                          style: poppinsMediumSmall.copyWith(
-                                              color: AppColor.black)),
-                                    ),
-                                    PopupMenuItem(
-                                      onTap: () {},
-                                      child: Text("Development",
-                                          style: poppinsMediumSmall.copyWith(
-                                              color: AppColor.black)),
-                                    ),
-                                    PopupMenuItem(
-                                      onTap: () {},
-                                      child: Text("Design",
-                                          style: poppinsMediumSmall.copyWith(
-                                              color: AppColor.black)),
-                                    ),
-                                  ])
-                        ],
+                              itemBuilder: (context) =>
+                                  state.category.map((category) {
+                                return PopupMenuItem(
+                                  onTap: () {
+                                    _selectedCategoryNotifier.value =
+                                        category.id;
+                                  },
+                                  child: Text(
+                                    category.name ?? '',
+                                    style: poppinsMediumSmall.copyWith(
+                                        color: AppColor.black),
+                                  ),
+                                );
+                              }).toList(),
+                            );
+                          } else {
+                            return const SizedBox();
+                          }
+                        },
                       ),
                     ),
                   ],
@@ -139,51 +153,68 @@ class _PasswordMangScreenState extends State<PasswordMangScreen> {
           ),
           BlocBuilder<AllAccountsCubit, AllAccountsState>(
             builder: (context, state) {
-              if (state is AllAccountsLoading) {
-                return SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.8,
-                    child: const Center(
-                        child: CircularProgressIndicator(
-                      color: AppColor.primarycolor,
-                    )));
-              }
-
               if (state is AllAccountsDone) {
-                if (state.account.isEmpty) {
-                  return Expanded(
-                    child: SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.8,
-                        child: Center(
-                            child: Lottie.asset('assets/images/empty.json'))),
-                  );
-                } else {
-                  return Expanded(
-                    child: ListView.builder(
-                        padding: EdgeInsets.zero,
-                        itemCount: state.account.length,
-                        itemBuilder: (context, index) {
-                          final accounts = state.account[index];
-                          return Slidable(
-                            endActionPane: ActionPane(
+                return ValueListenableBuilder<String?>(
+                  valueListenable: _selectedCategoryNotifier,
+                  builder: (context, selectedCategory, child) {
+                    final filteredAccounts = selectedCategory != null
+                        ? state.account
+                            .where((account) =>
+                                account.category?.id == selectedCategory)
+                            .toList()
+                        : state.account;
+
+                    if (filteredAccounts.isEmpty) {
+                      // Eğer filtrelenmiş hesaplar listesi boşsa bir widget göster
+                      // Bu örnekte Lottie animasyonu kullanıyoruz
+                      return Expanded(
+                        child: SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.8,
+                          child: Center(
+                            child: Lottie.asset('assets/images/empty.json'),
+                          ),
+                        ),
+                      );
+                    } else {
+                      return Expanded(
+                        child: ListView.builder(
+                          padding: EdgeInsets.zero,
+                          itemCount: filteredAccounts.length,
+                          itemBuilder: (context, index) {
+                            final accounts = filteredAccounts[index];
+                            return Slidable(
+                              endActionPane: ActionPane(
                                 motion: const DrawerMotion(),
                                 children: [
                                   SlidableAction(
                                     backgroundColor: AppColor.backgroundcolor,
-                                    onPressed: (context) {},
+                                    onPressed: (context) {
+                                      _controller.editCategoryBottomSheet(
+                                        accounts,
+                                        context,
+                                      );
+                                    },
                                     icon: Icons.edit,
                                   ),
-                                ]),
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 10.0, right: 10, bottom: 10),
-                              child: Container(
+                                ],
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                  left: 10.0,
+                                  right: 10,
+                                  bottom: 10,
+                                ),
+                                child: Container(
                                   decoration: BoxDecoration(
-                                      color: AppColor.lightblack,
-                                      borderRadius: BorderRadius.circular(15)),
+                                    color: AppColor.lightblack,
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
                                   child: ExpansionTile(
                                     backgroundColor: AppColor.lightblack,
                                     tilePadding: const EdgeInsets.symmetric(
-                                        horizontal: 16, vertical: 8),
+                                      horizontal: 16,
+                                      vertical: 8,
+                                    ),
                                     leading: ClipRRect(
                                       borderRadius: BorderRadius.circular(5),
                                       child: Image.asset(
@@ -196,12 +227,14 @@ class _PasswordMangScreenState extends State<PasswordMangScreen> {
                                     title: Text(
                                       accounts.name ?? "",
                                       style: poppinsMediumNormal.copyWith(
-                                          color: AppColor.purple),
+                                        color: AppColor.purple,
+                                      ),
                                     ),
                                     subtitle: Text(
                                       accounts.category?.name ?? "",
                                       style: poppinsMediumSmall.copyWith(
-                                          color: AppColor.grifortext),
+                                        color: AppColor.grifortext,
+                                      ),
                                     ),
                                     trailing: const Icon(
                                       Icons.keyboard_arrow_down,
@@ -210,7 +243,8 @@ class _PasswordMangScreenState extends State<PasswordMangScreen> {
                                     children: [
                                       Padding(
                                         padding: const EdgeInsets.symmetric(
-                                            horizontal: 10.0),
+                                          horizontal: 10.0,
+                                        ),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -227,15 +261,16 @@ class _PasswordMangScreenState extends State<PasswordMangScreen> {
                                                   " ${accounts.url}",
                                                   style: poppinsMediumSmall
                                                       .copyWith(
-                                                          color:
-                                                              AppColor.white),
+                                                    color: AppColor.white,
+                                                  ),
                                                 ),
                                               ],
                                             ),
                                             const SizedBox(height: 10),
                                             Padding(
                                               padding: const EdgeInsets.only(
-                                                  bottom: 10.0),
+                                                bottom: 10.0,
+                                              ),
                                               child: Row(
                                                 children: [
                                                   const Icon(
@@ -244,15 +279,13 @@ class _PasswordMangScreenState extends State<PasswordMangScreen> {
                                                         AppColor.primarycolor,
                                                     size: 20,
                                                   ),
-                                                  const SizedBox(
-                                                    width: 10,
-                                                  ),
+                                                  const SizedBox(width: 10),
                                                   Text(
                                                     " ${accounts.password}",
                                                     style: poppinsMediumSmall
                                                         .copyWith(
-                                                            color:
-                                                                AppColor.white),
+                                                      color: AppColor.white,
+                                                    ),
                                                   ),
                                                 ],
                                               ),
@@ -261,16 +294,20 @@ class _PasswordMangScreenState extends State<PasswordMangScreen> {
                                         ),
                                       ),
                                     ],
-                                  )),
-                            ),
-                          );
-                        }),
-                  );
-                }
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      );
+                    }
+                  },
+                );
               }
               return const SizedBox();
             },
-          )
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButtonPassword(

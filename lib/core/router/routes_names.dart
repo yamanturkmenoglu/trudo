@@ -29,4 +29,5 @@ class AppRoutes {
   ////////////////////////////////passwordManager////////////////////////////////
   static const passwordDetailsScreen = '/passwordDetailsScreen';
   static const addpasswordScreen = '/addpasswordScreen';
+  static const editpasswordScreen = '/editpasswordScreen';
 }

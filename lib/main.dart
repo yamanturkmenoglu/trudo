@@ -10,6 +10,8 @@ import 'package:trudo/features/feature_auth/feature_check_token/cubit/check_toke
 import 'package:trudo/features/feature_auth/feature_forgetpassword/cubit/forget_password_cubit/forget_password_cubit_cubit.dart';
 import 'package:trudo/features/feature_auth/feature_login/cubit/login_cubit/login_cubit_cubit.dart';
 import 'package:trudo/features/feature_auth/feature_sign_up/cubit/signup_cubit/signup_cubit_cubit.dart';
+import 'package:trudo/features/feature_password_managment/cubit/add_new_account_cubit/add_new_account_cubit_cubit.dart';
+import 'package:trudo/features/feature_password_managment/cubit/get_all_accounts_cubit/get_all_accounts_cubit_cubit.dart';
 import 'package:trudo/features/feature_password_managment/cubit/get_category_password_cubit/get_category_password_cubit_cubit.dart';
 import 'package:trudo/features/features_project&tasks/cubit/edit_add_task_cubit/edit_add_task_cubit_cubit.dart';
 import 'package:trudo/features/features_project&tasks/cubit/get_projects_tasks_cubit/projects_tasks_cubit_cubit.dart';
@@ -56,7 +58,10 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) => SignupCubit(),
           ),
-          BlocProvider(create: (context) => ForgetPasswordCubit())
+          BlocProvider(create: (context) => ForgetPasswordCubit()),
+          BlocProvider(create: (context) => AddNewAccountCubit()),
+          BlocProvider(
+              create: (context) => AllAccountsCubit()..getAllAccounts())
         ],
         child: AppRouter(
           builder: (context, router) => MaterialApp.router(

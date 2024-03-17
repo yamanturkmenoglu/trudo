@@ -28,10 +28,6 @@ class AddAccountModel {
     String? name,
     String? password,
     String? category,
-    String? id,
-    DateTime? createdAt,
-    DateTime? updatedAt,
-    int? v,
   }) =>
       AddAccountModel(
         url: url ?? this.url,

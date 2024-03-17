@@ -49,7 +49,7 @@ class _ToDoScreenState extends State<ToDoScreen> {
           SearchBarTextFild(
             onChanged: _filterCards,
           ),
-          Expanded(
+         Expanded(
             child: ListView.builder(
               padding: const EdgeInsets.only(top: 20),
               itemCount: filteredCards?.length ?? 0,
@@ -57,7 +57,10 @@ class _ToDoScreenState extends State<ToDoScreen> {
                 return TaskCard(
                   card: filteredCards![index],
                   onTap: () {
-                    context.push(AppRoutes.taskDetailsScreen);
+                    context.push(AppRoutes.taskDetailsScreen, extra: {
+                      'param1': widget.cards,
+                      'param2': filteredCards![index],
+                    });
                   },
                 );
               },

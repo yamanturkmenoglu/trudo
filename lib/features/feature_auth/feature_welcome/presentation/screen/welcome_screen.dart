@@ -50,7 +50,7 @@ class WelcomeScreen extends StatelessWidget {
                   highlightColor: Colors.transparent,
                   splashColor: Colors.transparent,
                   onTap: () {
-                    context.push(AppRoutes.signUp);
+                    context.push(AppRoutes.login);
                   },
                   child: Container(
                     height: 58,
@@ -65,7 +65,7 @@ class WelcomeScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Sign Up',
+                            'Log In',
                             style: TextStyle(
                               color: AppColor.purple,
                               fontSize: 18,
@@ -96,10 +96,10 @@ class WelcomeScreen extends StatelessWidget {
                         highlightColor: Colors.transparent,
                         splashColor: Colors.transparent,
                         onTap: () {
-                          context.push(AppRoutes.login);
+                          context.push(AppRoutes.signUp);
                         },
                         child: const Text(
-                          'Login',
+                          'Sign Up',
                           style: TextStyle(
                             color: AppColor.primarycolor,
                             fontSize: 16,

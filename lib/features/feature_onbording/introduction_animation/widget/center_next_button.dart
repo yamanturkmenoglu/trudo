@@ -120,7 +120,7 @@ class CenterNextButton extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text('Sign Up',
+                                  Text('Log In',
                                       style: poppinsMediumNormal.copyWith(
                                           color: AppColor.purple)),
                                   const Icon(Icons.arrow_forward_rounded,
@@ -158,9 +158,9 @@ class CenterNextButton extends StatelessWidget {
                   InkWell(
                     onTap: () {
                       saveStepToHive('1');
-                      context.go(AppRoutes.login);
+                      context.go(AppRoutes.signUp);
                     },
-                    child: Text('Login',
+                    child: Text('Sign Up',
                         style: poppinsMediumNormal.copyWith(
                             color: AppColor.primarycolor)),
                   ),

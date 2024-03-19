@@ -61,7 +61,7 @@ class CustomTextFormField extends StatelessWidget {
       this.onSave,
       this.onEditingComplete,
       this.style,
-      this.onSubmitted});
+      this.onSubmitted, });
 
   @override
   Widget build(BuildContext context) {

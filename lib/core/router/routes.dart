@@ -4,6 +4,7 @@ import 'package:trudo/core/router/routes_names.dart';
 import 'package:trudo/features/feature_Sales/presentation/screens/calenders/add_calender_screen.dart';
 import 'package:trudo/features/feature_Sales/presentation/screens/calenders/edit_calender_screen.dart';
 import 'package:trudo/features/feature_Sales/presentation/screens/contact/add_new-contacts_screen.dart';
+import 'package:trudo/features/feature_Sales/presentation/screens/contact/contact_details.dart';
 import 'package:trudo/features/feature_Sales/presentation/screens/contact/contact_screen.dart';
 import 'package:trudo/features/feature_Sales/presentation/screens/contact/edit_contact_screen.dart';
 import 'package:trudo/features/feature_Sales/presentation/screens/pipline/add_new_action_pipline_screen.dart';
@@ -150,6 +151,13 @@ final routes = [
     ),
   ),
   GoRoute(
+    path: AppRoutes.contactDetailsScreen,
+    pageBuilder: (context, state) => CupertinoPage<void>(
+      key: state.pageKey,
+      child: const ContactsDetailsScreen(),
+    ),
+  ),
+   GoRoute(
     path: AppRoutes.contactScreen,
     pageBuilder: (context, state) => CupertinoPage<void>(
       key: state.pageKey,

@@ -7,7 +7,7 @@ import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 import 'package:trudo/core/constens/api_links.dart';
 import 'package:trudo/core/providers/user_information_provider.dart';
-import 'package:trudo/features/features_project&tasks/cubit/get_projects_cubit/get_projects_cubit_state.dart';
+import 'package:trudo/features/features_project&tasks/cubit/projects/get_projects_cubit/get_projects_cubit_state.dart';
 import 'package:trudo/features/features_project&tasks/data/model/projects_model.dart';
 import 'package:trudo/widget/show_message.dart';
 

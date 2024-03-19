@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:trudo/core/constens/appcolors.dart';
 import 'package:trudo/features/feature_home/cubit/navbar_cubit.dart';
-import 'package:trudo/features/features_project&tasks/cubit/get_projects_cubit/get_projects_cubit_cubit.dart';
+import 'package:trudo/features/features_project&tasks/cubit/my_tasks/get_my_tasks/get_my_tasks_cubit.dart';
 import 'package:trudo/features/features_project&tasks/presentation/screen/mytasks/my_tasks_screen.dart';
 import 'package:trudo/features/features_project&tasks/presentation/screen/projects_and_alltasks/project_screen.dart';
 import 'package:trudo/widget/custtom_bottomnavbar_botton.dart';
@@ -62,13 +62,13 @@ class ProjectMainScreen extends StatelessWidget {
   Widget _buildPage(int currentPage) {
     switch (currentPage) {
       case 0:
-        return BlocProvider(
-          create: (context) => ProjectsCubit()..getProjects(context),
-          child: const ProjectScreen(),
-        );
+        return const ProjectScreen();
 
       case 1:
-        return const MyTasksScreen();
+        return BlocProvider(
+          create: (context) => GetMyTasksCubit()..getMyTasks(context),
+          child: const MyTasksScreen(),
+        );
 
       default:
         return const SizedBox.shrink();

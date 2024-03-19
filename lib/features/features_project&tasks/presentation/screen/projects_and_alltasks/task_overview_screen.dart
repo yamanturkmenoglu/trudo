@@ -6,9 +6,9 @@ import 'package:trudo/core/constens/appcolors.dart';
 import 'package:trudo/core/constens/textstyle.dart';
 import 'package:trudo/features/features_project&tasks/cubit/edit_add_task_cubit/edit_add_task_cubit_cubit.dart';
 import 'package:trudo/features/features_project&tasks/cubit/edit_add_task_cubit/edit_add_task_cubit_state.dart';
-import 'package:trudo/features/features_project&tasks/cubit/get_projects_tasks_cubit/projects_tasks_cubit_cubit.dart';
-import 'package:trudo/features/features_project&tasks/cubit/get_users_cubit/users_cubit_cubit.dart';
-import 'package:trudo/features/features_project&tasks/cubit/get_users_cubit/users_cubit_state.dart';
+import 'package:trudo/features/features_project&tasks/cubit/projects/get_projects_tasks_cubit/projects_tasks_cubit_cubit.dart';
+import 'package:trudo/features/features_project&tasks/cubit/projects/get_users_cubit/users_cubit_cubit.dart';
+import 'package:trudo/features/features_project&tasks/cubit/projects/get_users_cubit/users_cubit_state.dart';
 import 'package:trudo/features/features_project&tasks/data/model/all_users_model.dart';
 import 'package:trudo/features/features_project&tasks/data/model/project_details_model.dart'
     // ignore: library_prefixes

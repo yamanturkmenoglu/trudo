@@ -14,8 +14,9 @@ import 'package:trudo/features/feature_password_managment/cubit/add_new_account_
 import 'package:trudo/features/feature_password_managment/cubit/get_all_accounts_cubit/get_all_accounts_cubit_cubit.dart';
 import 'package:trudo/features/feature_password_managment/cubit/get_category_password_cubit/get_category_password_cubit_cubit.dart';
 import 'package:trudo/features/features_project&tasks/cubit/edit_add_task_cubit/edit_add_task_cubit_cubit.dart';
-import 'package:trudo/features/features_project&tasks/cubit/get_projects_tasks_cubit/projects_tasks_cubit_cubit.dart';
-import 'package:trudo/features/features_project&tasks/cubit/get_users_cubit/users_cubit_cubit.dart';
+import 'package:trudo/features/features_project&tasks/cubit/projects/get_projects_cubit/get_projects_cubit_cubit.dart';
+import 'package:trudo/features/features_project&tasks/cubit/projects/get_projects_tasks_cubit/projects_tasks_cubit_cubit.dart';
+import 'package:trudo/features/features_project&tasks/cubit/projects/get_users_cubit/users_cubit_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -61,7 +62,9 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => ForgetPasswordCubit()),
           BlocProvider(create: (context) => AddNewAccountCubit()),
           BlocProvider(
-              create: (context) => AllAccountsCubit()..getAllAccounts())
+              create: (context) => AllAccountsCubit()..getAllAccounts()),
+          BlocProvider(
+              create: (context) => ProjectsCubit()..getProjects(context))
         ],
         child: AppRouter(
           builder: (context, router) => MaterialApp.router(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:trudo/core/constens/appcolors.dart';
 import 'package:trudo/core/constens/appimages.dart';
 import 'package:trudo/core/constens/textstyle.dart';
@@ -83,7 +84,7 @@ class RelaxView extends StatelessWidget {
             children: [
               SlideTransition(
                 position: relaxAnimation,
-                child: Text("Relax",
+                child: Text("Features",
                     style: poppinsSemiBoldExtraLarge.copyWith(
                         color: AppColor.purple)),
               ),
@@ -93,20 +94,24 @@ class RelaxView extends StatelessWidget {
                   padding: const EdgeInsets.only(
                       left: 64, right: 64, top: 16, bottom: 16),
                   child: Text(
-                      "Lorem ipsum dolor sit amet,consectetur adipiscing elit,sed do eiusmod tempor incididunt ut labore",
+                      "Basic features of rudo. Get your work done organizedly and efficiently with task management, scheduling, collaboration tools, and more.",
                       textAlign: TextAlign.center,
                       style:
                           poppinsMediumSmall.copyWith(color: AppColor.purple)),
                 ),
+              ),
+              const SizedBox(
+                height: 50,
               ),
               SlideTransition(
                 position: imageAnimation,
                 child: Container(
                   constraints:
                       const BoxConstraints(maxWidth: 350, maxHeight: 250),
-                  child: Image.asset(
-                    AppImageasset.applogo,
+                  child: SvgPicture.asset(
+                    AppImageasset.features,
                     fit: BoxFit.contain,
+                    height: 150,
                   ),
                 ),
               ),

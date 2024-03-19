@@ -6,9 +6,9 @@ import 'package:trudo/core/constens/appcolors.dart';
 import 'package:trudo/core/constens/textstyle.dart';
 import 'package:trudo/core/providers/user_information_provider.dart';
 import 'package:trudo/core/router/routes_names.dart';
-import 'package:trudo/features/features_project&tasks/cubit/get_projects_cubit/get_projects_cubit_cubit.dart';
-import 'package:trudo/features/features_project&tasks/cubit/get_projects_cubit/get_projects_cubit_state.dart';
-import 'package:trudo/features/features_project&tasks/cubit/get_projects_tasks_cubit/projects_tasks_cubit_cubit.dart';
+import 'package:trudo/features/features_project&tasks/cubit/projects/get_projects_cubit/get_projects_cubit_cubit.dart';
+import 'package:trudo/features/features_project&tasks/cubit/projects/get_projects_cubit/get_projects_cubit_state.dart';
+import 'package:trudo/features/features_project&tasks/cubit/projects/get_projects_tasks_cubit/projects_tasks_cubit_cubit.dart';
 import 'package:trudo/features/features_project&tasks/presentation/widget/projects_card.dart';
 
 class ProjectScreen extends StatelessWidget {

@@ -13,4 +13,8 @@ class AppImageasset {
   static String sales = '$rootimages/sales.svg';
   static String password = '$rootimages/resetpassword.svg';
   static String todo = '$rootimages/todo.svg';
+  static String features = '$rootimages/feature.svg';
+  static String guide = '$rootimages/guide-book.svg';
+  static String raports = '$rootimages/analytics.svg';
+  static String client = '$rootimages/client.svg';
 }

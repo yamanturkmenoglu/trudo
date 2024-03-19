@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:trudo/core/constens/appcolors.dart';
 import 'package:trudo/core/constens/appimages.dart';
 import 'package:trudo/core/constens/textstyle.dart';
@@ -82,7 +83,7 @@ class MoodDiaryVew extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Mood Dairy",
+              Text("Fast & Secure Reports",
                   style: poppinsSemiBoldExtraLarge.copyWith(
                       color: AppColor.purple)),
               SlideTransition(
@@ -93,12 +94,15 @@ class MoodDiaryVew extends StatelessWidget {
                     padding: const EdgeInsets.only(
                         left: 64, right: 64, top: 16, bottom: 16),
                     child: Text(
-                        "Lorem ipsum dolor sit amet,consectetur adipiscing elit,sed do eiusmod tempor incididunt ut labore",
+                        "Trudo'nun satış raporlama ve şifre yönetimi özelliklerini keşfedin. İşinizi daha iyi organize edin ve güvende tutun.",
                         textAlign: TextAlign.center,
                         style: poppinsMediumSmall.copyWith(
                             color: AppColor.purple)),
                   ),
                 ),
+              ),
+              const SizedBox(
+                height: 50,
               ),
               SlideTransition(
                 position: imageFirstHalfAnimation,
@@ -107,9 +111,10 @@ class MoodDiaryVew extends StatelessWidget {
                   child: Container(
                     constraints:
                         const BoxConstraints(maxWidth: 350, maxHeight: 250),
-                    child: Image.asset(
-                      AppImageasset.applogo,
+                    child: SvgPicture.asset(
+                      AppImageasset.raports,
                       fit: BoxFit.contain,
+                      height: 150,
                     ),
                   ),
                 ),

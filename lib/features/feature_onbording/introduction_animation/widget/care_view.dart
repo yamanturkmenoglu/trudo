@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:trudo/core/constens/appcolors.dart';
 import 'package:trudo/core/constens/appimages.dart';
 import 'package:trudo/core/constens/textstyle.dart';
@@ -89,18 +90,22 @@ class CareView extends StatelessWidget {
                   child: Container(
                     constraints:
                         const BoxConstraints(maxWidth: 350, maxHeight: 250),
-                    child: Image.asset(
-                      AppImageasset.applogo,
+                    child: SvgPicture.asset(
+                      AppImageasset.guide,
                       fit: BoxFit.contain,
+                      height: 150,
                     ),
                   ),
                 ),
+              ),
+              const SizedBox(
+                height: 50,
               ),
               SlideTransition(
                 position: relaxFirstHalfAnimation,
                 child: SlideTransition(
                   position: relaxSecondHalfAnimation,
-                  child: Text("Care",
+                  child: Text("Guide",
                       style: poppinsSemiBoldExtraLarge.copyWith(
                           color: AppColor.purple)),
                 ),
@@ -109,7 +114,7 @@ class CareView extends StatelessWidget {
                 padding: const EdgeInsets.only(
                     left: 64, right: 64, bottom: 16, top: 16),
                 child: Text(
-                  "Lorem ipsum dolor sit amet,consectetur adipiscing elit,sed do eiusmod tempor incididunt ut labore",
+                  "A step-by-step guide to get started right away. We guide you through creating an account, setting preferences, and creating your first tasks.",
                   textAlign: TextAlign.center,
                   style: poppinsMediumSmall.copyWith(color: AppColor.purple),
                 ),

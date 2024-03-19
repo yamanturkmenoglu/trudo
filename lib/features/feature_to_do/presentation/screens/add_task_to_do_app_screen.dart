@@ -116,7 +116,7 @@ class _AddTaskToDoAppScreenState extends State<AddTaskToDoAppScreen> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                       borderSide: BorderSide.none,
-                    ),
+                    ), 
                   ),
                 ),
               ),

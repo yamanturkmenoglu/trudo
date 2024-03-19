@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:trudo/core/constens/appcolors.dart';
 import 'package:trudo/core/constens/appimages.dart';
 import 'package:trudo/features/feature_Sales/presentation/screens/sales_main_screen.dart';
+import 'package:trudo/features/feature_client/presentation/screen/client_screen.dart';
 import 'package:trudo/features/feature_password_managment/presentation/screen/password_mang_screen.dart';
 import 'package:trudo/features/feature_to_do/presentation/screens/to_do_app_screen.dart';
 import 'package:trudo/features/features_project&tasks/presentation/screen/projects_and_alltasks/project_and_tasks_main_screen.dart';
@@ -43,6 +44,12 @@ class HomeList {
       imagePath: AppImageasset.password,
       navigateScreen: const PasswordMangScreen(),
       color: const Color(0xFF262626), // Assign color
+    ),
+    HomeList(
+      title: 'Clients',
+      imagePath: AppImageasset.client,
+      navigateScreen: const ClientsScreen(),
+      color: const Color(0xFF737373), // Assign color
     ),
   ];
 }

@@ -42,12 +42,16 @@ class ContactScreenBody extends StatelessWidget {
             child: ListView.builder(
                 itemCount: 5,
                 itemBuilder: (context, index) {
-                  return ContactCards(
-                 
-                    onPressedEdit: (BuildContext) {
-                      context.push(AppRoutes.editContactsScreen);
+                  return InkWell(
+                    onTap: () {
+                      context.push(AppRoutes.contactDetailsScreen);
                     },
-                    onPressedDelete: (BuildContext) {},
+                    child: ContactCards(
+                      onPressedEdit: (BuildContext) {
+                        context.push(AppRoutes.editContactsScreen);
+                      },
+                      onPressedDelete: (BuildContext) {},
+                    ),
                   );
                 }),
           )
@@ -83,7 +87,7 @@ class ContactCards extends StatelessWidget {
           )
         ]),
         child: Container(
-          height: 190,
+          height: 170,
           decoration: BoxDecoration(
             color: AppColor.backgroundcolor,
             borderRadius: BorderRadius.circular(10),
@@ -109,7 +113,7 @@ class ContactCards extends StatelessWidget {
                       )),
                     ),
                     const SizedBox(
-                      width: 30,
+                      width: 15,
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -120,7 +124,7 @@ class ContactCards extends StatelessWidget {
                               color: AppColor.purple),
                         ),
                         const SizedBox(
-                          height: 10,
+                          height: 3,
                         ),
                         Text(
                           'Position',
@@ -129,9 +133,7 @@ class ContactCards extends StatelessWidget {
                         )
                       ],
                     ),
-                    const SizedBox(
-                      width: 100,
-                    ),
+                    const Spacer(),
                     Container(
                       height: 30,
                       width: 30,
@@ -150,13 +152,6 @@ class ContactCards extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: Row(
                     children: [
-                      const Icon(
-                        FontAwesomeIcons.mobile,
-                        color: AppColor.purple,
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
                       Text(
                         '0 531 854 02 08 ',
                         style:
@@ -166,19 +161,12 @@ class ContactCards extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(
-                  height: 25,
+                  height: 20,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: Row(
                     children: [
-                      const Icon(
-                        FontAwesomeIcons.envelopeCircleCheck,
-                        color: AppColor.purple,
-                      ),
-                      const SizedBox(
-                        width: 15,
-                      ),
                       Text(
                         'yamanturkmenoglu24@gmail.com',
                         style:

@@ -19,6 +19,8 @@ class AppRoutes {
   ////////////////////////////Sales/////////////////////////////////
   static const addNewActionPiplineScreen = '/addNewActionPiplineScreen';
   static const contactScreen = '/contactScreen';
+  static const contactDetailsScreen = '/contactDetailsScreen';
+
   static const addNewContactsScreen = '/addNewContactsScreen';
   static const editContactsScreen = '/editContactsScreen';
   static const addCalendersScreen = '/addCalendersScreen';

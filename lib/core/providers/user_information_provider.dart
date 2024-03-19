@@ -16,6 +16,7 @@ class UserInformationProvider with ChangeNotifier, DiagnosticableTreeMixin {
   UserHiveModel get userHiveModel => _userHiveModel;
 
   String get userName => _userHiveModel.name ?? "";
+  String get userId => _userHiveModel.id ?? "";
 
   setUserHiveModel(UserHiveModel user, String password) {
     log("setUserHiveModel $user");

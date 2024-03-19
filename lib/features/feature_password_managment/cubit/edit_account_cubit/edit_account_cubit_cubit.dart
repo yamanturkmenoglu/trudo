@@ -43,6 +43,7 @@ class EditAccountCubit extends Cubit<EditAccountState> {
       if (response.statusCode == 200) {
         final accountModel = accountsModelFromJson(
             response.body); 
+        // ignore: use_build_context_synchronously
         context.read<AllAccountsCubit>().editAccount(id, accountModel);
         emit(state.copyWith(status: Status.success));
         emit(state.copyWith(status: Status.initial));

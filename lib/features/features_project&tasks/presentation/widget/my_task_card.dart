@@ -5,18 +5,16 @@ import 'package:trudo/core/constens/textstyle.dart';
 import 'package:trudo/features/features_project&tasks/cubit/projects/get_users_cubit/users_cubit_cubit.dart';
 import 'package:trudo/features/features_project&tasks/cubit/projects/get_users_cubit/users_cubit_state.dart';
 import 'package:trudo/features/features_project&tasks/data/model/all_users_model.dart';
-import 'package:trudo/features/features_project&tasks/data/model/project_details_model.dart'
-    // ignore: library_prefixes
-    as ProjectDetailsModel;
+import 'package:trudo/features/features_project&tasks/data/model/maytaskmodel.dart';
 import 'package:trudo/features/features_project&tasks/presentation/processing/find_user.dart';
 
-class TaskCard extends StatelessWidget {
-  const TaskCard({
+class MyTaskCard extends StatelessWidget {
+  const MyTaskCard({
     Key? key,
-    required this.card,
     required this.onTap,
+    required this.myTaskModel,
   }) : super(key: key);
-  final ProjectDetailsModel.Card card;
+  final MyTaskModel myTaskModel;
   final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
@@ -32,7 +30,7 @@ class TaskCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: ExpansionTile(
-                title: Text(card.name ?? '',
+                title: Text(myTaskModel.name ?? '',
                     style:
                         poppinsMediumNormal.copyWith(color: AppColor.purple)),
                 trailing: const Icon(
@@ -48,7 +46,7 @@ class TaskCard extends StatelessWidget {
                     child: Column(
                       children: [
                         Text(
-                          card.description ?? "",
+                          myTaskModel.description ?? "",
                           style: poppinsMediumSmall.copyWith(
                               color: AppColor.purple, fontSize: 10),
                         ),
@@ -68,7 +66,7 @@ class TaskCard extends StatelessWidget {
                             title: Text('Files',
                                 style: poppinsMediumNormal.copyWith(
                                     color: AppColor.purple, fontSize: 14)),
-                            trailing: Text(card.files?.length.toString() ?? "",
+                            trailing: Text(myTaskModel.files!.length.toString(),
                                 style: poppinsMediumSmall.copyWith(
                                     color: AppColor.purple)),
                           ),
@@ -90,7 +88,7 @@ class TaskCard extends StatelessWidget {
                                 style: poppinsMediumNormal.copyWith(
                                     color: AppColor.purple, fontSize: 14)),
                             trailing: Text(
-                                card.comments?.length.toString() ?? "",
+                                myTaskModel.comments!.length.toString(),
                                 style: poppinsMediumSmall.copyWith(
                                     color: AppColor.purple)),
                           ),
@@ -112,7 +110,7 @@ class TaskCard extends StatelessWidget {
                                 style: poppinsMediumNormal.copyWith(
                                     color: AppColor.purple, fontSize: 14)),
                             trailing: Text(
-                                card.subTasks?.length.toString() ?? "",
+                                myTaskModel.subTasks!.length.toString(),
                                 style: poppinsMediumSmall.copyWith(
                                     color: AppColor.purple)),
                           ),
@@ -123,8 +121,8 @@ class TaskCard extends StatelessWidget {
                         BlocBuilder<AllUsersCubit, AllUsersState>(
                           builder: (context, state) {
                             if (state is AllUsersDone) {
-                              AllUsersModel? user =
-                                  findUser(state.users, card.assignedTo!);
+                              AllUsersModel? user = findUser(state.users,
+                                  myTaskModel.assignedTo.toString());
                               return user == null
                                   ? const SizedBox()
                                   : Container(
@@ -144,9 +142,7 @@ class TaskCard extends StatelessWidget {
                                                 color: AppColor.purple,
                                                 fontSize: 14)),
                                         trailing: Text(
-                                          card.updatedAt
-                                              .toString()
-                                              .substring(0, 10),
+                                          myTaskModel.updatedAt.toString(),
                                           style: poppinsMediumSmall.copyWith(
                                             color: const Color(0xFFEB1414),
                                           ),
